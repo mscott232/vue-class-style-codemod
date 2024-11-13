@@ -73,7 +73,7 @@ function generateDefinePropsDeclaration(root: ReturnType<Core>, j: JSCodeshift, 
     // @ts-ignore
     const typeAnnotation = j(nodePath.node.typeAnnotation).toSource().replace(': ', '').replace(':', '');
     const decorators: Decorator[] = 'decorators' in nodePath.node ? (nodePath.node.decorators as Decorator[]) : [];
-    const required: boolean = 'definite' in nodePath.node ? !!nodePath.node.definite : false;
+    let required: boolean = 'definite' in nodePath.node ? !!nodePath.node.definite : false;
     let property: ObjectProperty|null = null;
     if (decorators.length < 1) return;
 
@@ -83,13 +83,18 @@ function generateDefinePropsDeclaration(root: ReturnType<Core>, j: JSCodeshift, 
     const propArgument = expression.arguments[0];
 
     if (propArgument.type === 'ObjectExpression') {
-      // @Prop({ default: 'default value' }) -> propB: { type: String }
+      // @Prop({ default: 'default value', required: false }) -> propB?: { type: String }
 
       for (const prop of propArgument.properties) {
         if (prop.type === 'ObjectProperty' && prop.key.type === 'Identifier' && prop.key.name === 'default') {
           hasDefaults = true;
           prop.key.name = key.name;
           defaluts.push(prop);
+        }
+        if (prop.type === 'ObjectProperty' && prop.key.type === 'Identifier' && prop.key.name === 'required') {
+          if (prop.value.type === 'BooleanLiteral') {
+            required = prop.value.value; // Set required to true or false
+          }
         }
       }
     }

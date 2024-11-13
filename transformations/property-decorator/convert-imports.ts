@@ -11,7 +11,8 @@ import {ContextCollections} from "./ContextCollections";
 export function transformImports(root: Collection, j: JSCodeshift, collections: ContextCollections) {
     const propertyDecoratorImports: Collection<ImportDeclaration> = root.find(j.ImportDeclaration, {
         source: {
-            value: 'vue-property-decorator'
+            // value: 'vue-property-decorator'
+            value: '@/utils/vue-imports'
         }
     });
 

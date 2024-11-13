@@ -106,7 +106,7 @@ function generateDefineEmitsDeclaration(root: ReturnType<Core>, j: JSCodeshift, 
     const emits = j(j.objectExpression(emitSet)).toSource();
     return j.variableDeclaration('const', [
         j.variableDeclarator(
-            j.identifier('emits'),
+            j.identifier('emit'),
             j.callExpression(
                 j.identifier('defineEmits<'+ emits +'>' ),
                 []

@@ -11,7 +11,7 @@ export const transformAST: ASTTransformation = ({ j, root }) => {
     callee: {
       type: 'MemberExpression',
       object: {
-        name: 'router' || 'route'
+        name: 'router'
       },
       property: {
         type: 'Identifier',

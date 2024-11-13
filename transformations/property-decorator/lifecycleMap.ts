@@ -1,6 +1,6 @@
 
 export const lifecycleMap: { [key: string]: string | null } = {
-  created: null,
+  created: 'onBeforeMount',
   beforeCreate: null,
   beforeMount: 'onBeforeMount',
   mounted: 'onMounted',

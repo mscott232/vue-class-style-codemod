@@ -16,10 +16,10 @@ export function transformReactiveProps(root: Collection, j: JSCodeshift, collect
         }).replaceWith(path => {
             const object = path.node.object as unknown;
 
-            if (typeof object === 'string') {
+            // if (typeof object === 'string') {
                 const newObjectString = (object as string).replace(prop, prop + '.value')
                 path.node.object = j.identifier(newObjectString);
-            }
+            // }
 
             return path.node
         })
