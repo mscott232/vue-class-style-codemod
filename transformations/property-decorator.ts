@@ -35,6 +35,7 @@ import {transformRouterCalls} from "./property-decorator/convert-router-calls";
 import {transformStoreCalls} from "./property-decorator/convert-store-calls";
 import {transformStaticCalls} from "./property-decorator/convert-static-calls";
 import {transformThisCalls} from "./property-decorator/convert-this-calls";
+import { transformI18nImport } from './property-decorator/convert-i18n-import';
 // import {transformAddDefineExpose} from "./property-decorator/convert-add-defineExpose";
 
 function findClassDeclarationWithComponentDecorator(root: Collection, j: JSCodeshift): Collection<ClassDeclaration> {
@@ -140,6 +141,7 @@ export const transformAST: ASTTransformation = ({root, j}) => {
   transformThisCalls(root, j);
   transformReactiveProps(root, j, collections);
   transformImports(root, j, collections);
+  transformI18nImport(j, root);
   // transformAddDefineExpose(classComponent, j, root, collections);
 
   // Insert new code and remove old nodes
