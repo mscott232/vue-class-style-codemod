@@ -1,4 +1,4 @@
-import {Collection, ImportDeclaration, ImportSpecifier, JSCodeshift} from "jscodeshift";
+import {Collection, ImportDeclaration, JSCodeshift} from "jscodeshift";
 
 export function transformI18nImport(j: JSCodeshift, root: Collection) {
   const useI18nImports: Collection<ImportDeclaration> = root.find(j.ImportDeclaration, {
