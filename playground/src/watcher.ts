@@ -13,11 +13,9 @@ export function useFileWatcher(callback: (e: Event) => void) {
 
   const connect = () => {
     console.info('Connecting to WS...')
-    console.log(store.apiPort)
     ws = new WebSocket(`ws://localhost:${store.apiPort}/`)
 
     ws.addEventListener('message', (e) => {
-      console.log('this')
       const data = JSON.parse(e.data)
       callback(data)
     })
@@ -29,7 +27,6 @@ export function useFileWatcher(callback: (e: Event) => void) {
   }
 
   const send = (v: any) => {
-    console.log('send')
     ws?.send(JSON.stringify(v))
   }
 

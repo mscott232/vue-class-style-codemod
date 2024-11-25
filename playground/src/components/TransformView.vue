@@ -78,7 +78,6 @@ export default defineComponent({
             'Content-Type': 'text/plain',
           },
         })
-        console.log(r)
         output.value = await r.text()
         lastUpdate.value = new Date().toLocaleTimeString()
       } catch (e) {

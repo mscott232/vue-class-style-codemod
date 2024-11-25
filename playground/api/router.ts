@@ -44,11 +44,7 @@ router.post('/run/:trans', async (ctx) => {
     encoding: 'utf-8',
   })
 
-  console.log(result)
-
   const { stderr, stdout } = result
-  console.log(stderr)
-  console.log(stdout)
 
   if (stderr) {
     ctx.body = `/* ERROR */\n\n${stderr}\n`
